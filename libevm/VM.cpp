@@ -209,7 +209,9 @@ void VM::interpretCases()
 
 		CASE(CREATE2)
 		{
-			ON_OP();
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            ON_OP();
 			if (!m_schedule->haveCreate2)
 				throwBadInstruction();
 
@@ -219,7 +221,9 @@ void VM::interpretCases()
 
 		CASE(CREATE)
 		{
-			ON_OP();
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            ON_OP();
 			if (m_ext->staticCall)
 				throwDisallowedStateChange();
 
@@ -232,7 +236,9 @@ void VM::interpretCases()
 		CASE(CALL)
 		CASE(CALLCODE)
 		{
-			ON_OP();
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            ON_OP();
 			if (m_OP == Instruction::DELEGATECALL && !m_schedule->haveDelegateCall)
 				throwBadInstruction();
 			if (m_OP == Instruction::STATICCALL && !m_schedule->haveStaticCall)
@@ -1253,7 +1259,9 @@ void VM::interpretCases()
 
 		CASE(EXTCODESIZE)
 		{
-			m_runGas = toInt63(m_schedule->extcodesizeGas);
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            m_runGas = toInt63(m_schedule->extcodesizeGas);
 			ON_OP();
 			updateIOGas();
 
@@ -1302,7 +1310,9 @@ void VM::interpretCases()
 
 		CASE(EXTCODECOPY)
 		{
-			ON_OP();
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            ON_OP();
 			m_runGas = toInt63(m_schedule->extcodecopyGas);
 			m_copyMemSize = toInt63(m_SP[3]);
 			updateMem(memNeed(m_SP[1], m_SP[3]));
@@ -1325,7 +1335,9 @@ void VM::interpretCases()
 
 		CASE(BLOCKHASH)
 		{
-			ON_OP();
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
+            ON_OP();
 			m_runGas = toInt63(m_schedule->blockhashGas);
 			updateIOGas();
 
