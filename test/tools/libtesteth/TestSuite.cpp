@@ -152,7 +152,15 @@ void TestSuite::runAllTestsInFolder(string const& _testFolder) const
 	{
 		testOutput.showProgress();
 		testOutput.setCurrentTestFile(file);
-		executeTest(_testFolder, file);
+        try
+        {
+            executeTest(_testFolder, file);
+        }
+        catch(...)
+        {
+            cerr << "an exception in " << file << endl;
+            throw;
+        }
 	}
 	testOutput.finishTest();
 }

@@ -1172,6 +1172,8 @@ void VM::interpretCases()
 
 		CASE(BALANCE)
 		{
+            BOOST_THROW_EXCEPTION(DisallowedInstruction());
+
 			m_runGas = toInt63(m_schedule->balanceGas);
 			ON_OP();
 			updateIOGas();
